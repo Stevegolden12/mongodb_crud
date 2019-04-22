@@ -1,5 +1,5 @@
 const express = require('express')
-const body-parser = require('body-parser')
+const bodyParser = require('body-parser')
 const path = require('path')
 
 const db = require('./db')
@@ -7,4 +7,15 @@ const collection = "todo";
 
 const app = express();
 
-app.use(bodyparser.json())
+app.use(bodyParser.json())
+
+db.connect((err) => {
+  if (err) {
+    console.log("unable to connect to database")
+    process.exit(1);
+  } else {
+    app.listen(3000, () => {
+      console.log('connected to database, app listening to port 3000')
+    });
+  }
+})
